@@ -1,0 +1,54 @@
+html {
+	overflow-y: scroll;
+}
+
+body {
+	._no-tap();
+	._rem-px(font-size, @font-size-s);
+	background-color: @color-background;
+	color: @color-text;
+	font-family: @font-family;
+	line-height: 1.3;
+}
+
+a {
+	color: @color-link;
+	text-decoration: none;
+
+	&:focus,
+	&:hover {
+		color: @color-link-active;
+	}
+
+	&[href^="http"],
+	&[href^="mailto:"] {
+		text-decoration: underline;
+	}
+}
+
+img {
+	max-width: 100%;
+
+	&[height] {
+		height: auto;
+	}
+}
+
+h1, h2, h3, h4, h5, h6 {
+	margin: 0;
+}
+
+#main {
+	box-sizing: border-box;
+	margin: 0 auto;
+	padding: 30px @padding-unit;
+	position: relative;
+
+	@media (max-width: @layout-small) {
+		padding: @padding-unit;
+	}
+
+	@media (min-width: @layout-large) {
+		max-width: @layout-large;
+	}
+}

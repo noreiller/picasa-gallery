@@ -1,0 +1,54 @@
+{
+  "name": "picasa-gallery",
+  "version": "0.0.0",
+  "description": "Isomorphic app to browse Picasa albums",
+  "main": "server.js",
+  "author": "aurelien@amanca.fr",
+  "license": "MIT",
+  "scripts": {
+    "start": "node server.js",
+    "start-dev": "npm run lint && (nodemon -e js,jsx,json server.js --ignore public/ & watchify app/client.jsx -o public/scripts/app.js & nodemon -w less -e less --exec 'npm run build-css')",
+    "build-css": "lessc -s less/index.less  | autoprefixer | cssmin > public/styles/app.css",
+    "build-js": "npm run lint && browserify app/client.jsx > public/scripts/app.js",
+    "lint": "jshint app/ config/ && jsxhint app/"
+  },
+  "browserify": {
+    "transform": [
+      "reactify",
+      [
+        "configurify",
+        {
+          "pattern": "**/config.js"
+        }
+      ]
+    ]
+  },
+  "dependencies": {
+    "autoprefixer": "^5.1.1",
+    "body-parser": "^1.12.4",
+    "browserify": "^10.2.1",
+    "configurify": "^1.0.0",
+    "cssmin": "^0.4.3",
+    "ejs": "^2.3.1",
+    "es6-promise": "^2.1.1",
+    "express": "^4.12.3",
+    "fibers": "^1.0.5",
+    "less": "^2.5.1",
+    "mime": "^1.3.4",
+    "node-jsx": "^0.13.3",
+    "normalize.css": "^3.0.3",
+    "react": "^0.13.3",
+    "react-async": "^2.1.0",
+    "react-document-title": "^1.0.2",
+    "react-router": "^0.13.3",
+    "reactify": "^1.1.1",
+    "superagent": "^1.2.0",
+    "underscore": "^1.8.3"
+  },
+  "devDependencies": {
+    "jshint": "^2.7.0",
+    "jsxhint": "^0.14.0",
+    "nodemon": "^1.3.7",
+    "watchify": "^3.2.1"
+  }
+}

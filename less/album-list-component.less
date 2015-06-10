@@ -1,0 +1,45 @@
+.album-list-component {
+	.album-list {
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	.album-link {
+		display: block;
+		padding: @padding-unit 0;
+	}
+
+	@media (max-width: @layout-small) {
+		.album-list {
+			margin-top: @padding-unit * 2;
+		}
+
+		.album-title {
+			padding: @padding-unit 0;
+		}
+	}
+
+	@media (min-width: @layout-small) {
+		.album-list {
+			text-align: left;
+		}
+
+		.album-title,
+		.album-image {
+			display: inline-block;
+			vertical-align: middle;
+		}
+
+		.album-title {
+			max-width: 75%;
+			padding: @padding-unit;
+
+			h2 {
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+			}
+		}
+	}
+}

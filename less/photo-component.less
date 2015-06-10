@@ -1,0 +1,57 @@
+.photo-component {
+	position: relative;
+
+	.image {
+		margin: @padding-unit 0 0;
+	}
+
+	.links {
+		list-style-type: none;
+		margin: @padding-unit 0 0;
+		padding: 0;
+		text-align: center;
+
+		li {
+			display: inline-block;
+			position: relative;
+		}
+
+		a {
+			padding: @padding-unit;
+			position: relative;
+		}
+	}
+
+
+	li.prev + li.next:before {
+		content: '-';
+	}
+
+	a.prev:before {
+		content: '<';
+		margin-right: @padding-unit;
+		vertical-align: middle;
+	}
+
+	a.next:after {
+		content: '>';
+		margin-left: @padding-unit;
+		vertical-align: middle;
+	}
+
+	@media (max-width: @layout-small) {
+		.back {
+			display: block;
+			margin-top: @padding-unit;
+			text-align: center;
+		}
+	}
+
+	@media (min-width: @layout-small) {
+		.back {
+			position: absolute;
+			right: 0;
+			top: @padding-unit;
+		}
+	}
+}

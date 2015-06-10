@@ -1,0 +1,38 @@
+.navigation-component {
+	.nav-list-title {
+		._rem-px(font-size, @font-size-l);
+		display: block;
+		padding: @padding-unit;
+		text-align: right;
+	}
+
+	.nav-list {
+		background-color: @nav-color-background;
+		margin: 0;
+		padding: 0;
+	}
+
+	.nav-item {
+		border-right: 1px solid @color-background;
+		display: inline-block;
+	}
+
+	.nav-link {
+		display: inline-block;
+		padding: @padding-unit;
+		text-transform: uppercase;
+		text-shadow: 0 0 5px #333;
+
+		&.active {
+			color: @color-link-active;
+			text-shadow: 0 0 5px #000;
+		}
+	}
+
+	@media (max-width: @layout-small) {
+		.nav-link,
+		.nav-list-title {
+			padding: @padding-unit * .5;
+		}
+	}
+}

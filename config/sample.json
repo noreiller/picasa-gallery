@@ -1,0 +1,18 @@
+{
+	"title": "Picasa gallery"
+	, "root": "/"
+	, "lang": "en"
+	, "favicon": "https://lh3.googleusercontent.com/favicon.ico"
+	, "user": null
+	, "pages": [
+		{
+			"key": "homepage"
+			, "title": "Homepage"
+			, "content": "Picasa gallery"
+		}, {
+			"key": "gallery"
+			, "title": "Photo gallery"
+			, "route": "/gallery.html"
+		}
+	]
+}

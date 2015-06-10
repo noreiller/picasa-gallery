@@ -1,0 +1,53 @@
+.album-component {
+	position: relative;
+
+	.photo-list {
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	.photo-item {
+		display: inline-block;
+		vertical-align: middle;
+
+		&.active {
+			display: block;
+			width: 100%;
+		}
+	}
+
+	.photo-link {
+		display: inline-block;
+		padding: @padding-unit;
+
+		&.active {
+			display: block;
+			padding: @padding-unit 0;
+		}
+	}
+
+	.photo-image {
+		width: 100%;
+	}
+
+	@media (max-width: @layout-small) {
+		.back {
+			display: block;
+			margin-top: @padding-unit;
+			text-align: center;
+		}
+
+		.photo-item {
+			width: 50%;
+		}
+	}
+
+	@media (min-width: @layout-small) {
+		.back {
+			position: absolute;
+			right: 0;
+			top: @padding-unit;
+		}
+	}
+}

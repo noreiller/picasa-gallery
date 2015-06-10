@@ -1,0 +1,59 @@
+// REM/PX PROPERTIES
+._rem-px (@property, @value) {
+	@remValue: @value;
+	@pxValue: (@value * 16); // 16px based
+
+	@{property}: ~"@{pxValue}px";
+	@{property}: ~"@{remValue}rem";
+}
+
+// NO TAP
+._no-tap () {
+	outline: 0;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-tap-highlight-color: transparent; /* For some Androids */
+}
+
+// NO TYPO
+._no-typo () {
+	font-size: 0;
+	line-height: 0;
+}
+
+// CLEARFIX
+._clearfix () {
+	&:before,
+	&:after {
+		font-size: 0;
+		letter-spacing: 0;
+		content: "";
+		display: table;
+	}
+	&:after {
+		clear: both;
+	}
+}
+
+// CENTERED POSITIONS
+._horizontal-centering (@more:'') {
+	position: relative;
+	left: 50%;
+	transform: ~"translateX(-50%) @{more}";
+}
+._vertical-centering (@more:'') {
+	position: relative;
+	top: 50%;
+	transform: ~"translateY(-50%) @{more}";
+}
+._full-centering (@more:'') {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: ~"translateX(-50%) translateY(-50%) @{more}";
+}
+._no-centering (@more: inherit) {
+	position: static;
+	left: auto;
+	top: auto;
+	transform: @more;
+}

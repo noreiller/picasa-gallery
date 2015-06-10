@@ -1,0 +1,4 @@
+config/*
+!config/sample.json
+node_modules
+npm-debug.log
