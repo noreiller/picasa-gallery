@@ -7,6 +7,7 @@ var constants = require('../constants.js');
 var config = require('../../config.js');
 var AlbumsActions = require('../actions/albums.js');
 var AlbumsStore = require('../stores/albums.js');
+var Loading = require('./loading.jsx');
 
 function _getAlbums () {
 	return {
@@ -50,6 +51,12 @@ var AlbumListComponent = React.createClass({
 						</div>
 					</Link>
 				</li>
+			);
+		}
+
+		if (!items.length) {
+			items.push(
+				<li><Loading/></li>
 			);
 		}
 

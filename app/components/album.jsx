@@ -10,6 +10,7 @@ var config = require('../../config.js');
 var env = require('../../env.js');
 var AlbumActions = require('../actions/album.js');
 var AlbumStore = require('../stores/album.js');
+var Loading = require('./loading.jsx');
 
 function _getAlbum () {
 	return {
@@ -81,7 +82,11 @@ var AlbumComponent = React.createClass({
 				);
 			}
 		}
-
+		else {
+			items.push(
+				<li><Loading/></li>
+			);
+		}
 
 		var link;
 

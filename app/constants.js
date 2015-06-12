@@ -22,12 +22,14 @@ module.exports = {
 			, BACK_TO_ALBUM: 'Back to the album'
 			, PREVIOUS_PHOTO: 'Previous photo'
 			, NEXT_PHOTO: 'Next photo'
+			, LOADING: 'Loading...'
 		}
 		, fr: {
 			BACK_TO_LIST: 'Retour à la liste'
 			, BACK_TO_ALBUM: 'Retour à l\'album'
 			, PREVIOUS_PHOTO: 'Photo précédente'
 			, NEXT_PHOTO: 'Photo suivante'
+			, LOADING: 'Chargement...'
 		}
 	}
 };
