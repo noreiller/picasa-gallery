@@ -24,7 +24,7 @@ require("node-jsx").install({ extension: '.jsx' });
 app.get('*', require(path.join(__dirname, 'app', 'server.jsx')));
 
 // SERVER
-var server = app.listen(process.env.PORT || 3000, function () {
+var server = app.listen(process.env.PORT || 3000, process.env.HOST || 'localhost', function () {
 	var host = server.address().address;
 	var port = server.address().port;
 
