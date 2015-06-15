@@ -1,3 +1,4 @@
+var Promise = require('es6-promise').Promise; // jshint ignore:line
 var config = require('../config.js');
 var utils = {};
 
@@ -24,6 +25,22 @@ utils.getOffsetTop = function (element) {
 	}
 
 	return offsetTop;
+};
+
+utils.imgLoad = function (url) {
+	return new Promise(function (resolve, reject) {
+		var img = new Image();
+
+		img.onload = function () {
+			resolve();
+		};
+
+		img.onerror = function () {
+			reject(Error('Image didn\'t load successfully'));
+		};
+
+		img.src = url;
+	});
 };
 
 module.exports = utils;

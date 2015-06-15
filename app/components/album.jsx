@@ -23,8 +23,7 @@ var AlbumComponent = React.createClass({
 
 	, getDefaultProps: function () {
 		return {
-			photoid: null
-			, page: {}
+			page: {}
 		};
 	}
 
@@ -34,11 +33,7 @@ var AlbumComponent = React.createClass({
 
 	, componentDidMount: function () {
 		AlbumStore.addChangeListener(this._onChange);
-
-		if (this.refs.active && !env.server) {
-			var y = utils.getOffsetTop(React.findDOMNode(this.refs.active));
-			window.scrollTo(0, y - 30);
-		}
+		this._update();
 	}
 
 	, componentWillUnmount: function () {
@@ -47,36 +42,20 @@ var AlbumComponent = React.createClass({
 
 	, render: function () {
 		var items = [];
-		var hasActive = false;
 		var titles = [this.props.page.title];
 
 		if (this.state.album) {
 			titles.unshift(this.state.album.album.title);
 
 			for (var i = 0; i < this.state.album.photos.length; i++) {
-				var className = 'photo-item';
 				var photo = this.state.album.photos[i];
-				var active = this.props.photoid === photo.id;
-				var image = null;
-
-				if (active) {
-					hasActive = true;
-					className += ((className.length ? ' ' : '') + 'active');
-					titles.unshift(photo.title);
-					image = (
-						<img ref="active" className="photo-image full" alt={photo.title} src={photo.image} width={photo.image_width} height={photo.image_height} />
-					);
-				}
-				else {
-					image = (
-						<img className="photo-image thumb" alt={photo.title} src={photo.thumbnail} width={photo.thumbnail_width} height={photo.thumbnail_height} />
-					);
-				}
 
 				items.push(
-					<li className={className} key={'photo-' + photo.id}>
-						<Link className="photo-link" to={constants.PageKeys.GALLERY + '-photo'} params={{ albumid: this.state.album.album.id, photoid: photo.id }}>
-							{image}
+					<li className="photo-item" key={'photo-' + photo.id}>
+						<Link className="photo-link" to={constants.PageKeys.GALLERY + '-photo'}
+							params={{ albumid: this.state.album.album.id, photoid: photo.id }}>
+							<img className="photo-image thumb" alt={photo.title} src={photo.thumbnail}
+								width={photo.thumbnail_width} height={photo.thumbnail_height} />
 						</Link>
 					</li>
 				);
@@ -85,23 +64,6 @@ var AlbumComponent = React.createClass({
 		else {
 			items.push(
 				<li><Loading/></li>
-			);
-		}
-
-		var link;
-
-		if (hasActive) {
-			link = (
-				<Link className="back" to={constants.PageKeys.GALLERY + '-album'} params={{ albumid: this.state.album.album.id }}>
-					{constants.I18n[config.lang].BACK_TO_ALBUM}
-				</Link>
-			);
-		}
-		else {
-			link = (
-				<Link className="back" to={constants.PageKeys.GALLERY}>
-					{constants.I18n[config.lang].BACK_TO_LIST}
-				</Link>
 			);
 		}
 
@@ -114,7 +76,9 @@ var AlbumComponent = React.createClass({
 						{items}
 					</ul>
 
-					{link}
+					<Link className="back" to={constants.PageKeys.GALLERY}>
+						{constants.I18n[config.lang].BACK_TO_LIST}
+					</Link>
 				</div>
 			</DocumentTitle>
 		);

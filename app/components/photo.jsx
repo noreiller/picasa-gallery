@@ -1,5 +1,6 @@
 var React = require('react');
 var PureRenderMixin = require('react/addons').addons.PureRenderMixin;
+var ReactCSSTransitionGroup = require('react/addons').addons.CSSTransitionGroup;
 var ReactAsync = require('react-async');
 var Router = require('react-router');
 var Link = Router.Link;
@@ -21,6 +22,21 @@ function _getAlbum () {
 var AlbumComponent = React.createClass({
 	mixins: [Router.State, ReactAsync.Mixin, PureRenderMixin]
 
+	, statics: {
+		willTransitionFrom: function (transition, component, callback) {
+			callback();
+		}
+		, willTransitionTo: function (transition, params, query, callback) {
+			if (!env.server && params.photoid && AlbumStore.getAlbum()) {
+				var photo = AlbumStore.getPhoto(params.photoid);
+				utils.imgLoad(photo.image).then(callback);
+			}
+			else {
+				callback();
+			}
+		}
+	}
+
 	, getDefaultProps: function () {
 		return {
 			photoid: null
@@ -34,6 +50,7 @@ var AlbumComponent = React.createClass({
 
 	, componentDidMount: function () {
 		AlbumStore.addChangeListener(this._onChange);
+		this._update();
 	}
 
 	, componentWillUnmount: function () {
@@ -53,16 +70,15 @@ var AlbumComponent = React.createClass({
 			titles.unshift(this.state.album.album.title);
 
 			for (var i = 0; i < this.state.album.photos.length; i++) {
-				var className = 'photo-item';
 				var photo = this.state.album.photos[i];
-				var active = this.props.photoid === photo.id;
 
 				if (this.props.photoid === photo.id) {
 					hasActive = true;
-					className += ((className.length ? ' ' : '') + 'active');
 					titles.unshift(photo.title);
 					image = (
-						<img ref="active" className="image full" alt={photo.title} src={photo.image} width={photo.image_width} height={photo.image_height} />
+						<ReactCSSTransitionGroup transitionName="transition" transitionAppear={true}>
+							<img ref="active" className="image full" alt={photo.title} src={photo.image} width={photo.image_width} height={photo.image_height} />
+						</ReactCSSTransitionGroup>
 					);
 
 					if (i > 0) {
@@ -72,6 +88,8 @@ var AlbumComponent = React.createClass({
 					if (i < this.state.album.photos.length - 1) {
 						nextId = this.state.album.photos[i + 1].id;
 					}
+
+					break;
 				}
 			}
 

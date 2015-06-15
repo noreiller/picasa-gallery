@@ -54,4 +54,14 @@
 			top: @padding-unit;
 		}
 	}
+
+	.transition-appear {
+		opacity: 0.01;
+		transition: opacity .5s ease-in;
+	}
+
+	.transition-appear.transition-appear-active {
+		opacity: 1;
+	}
+
 }

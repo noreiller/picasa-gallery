@@ -31,6 +31,19 @@ var AlbumStore = _.extend({}, EventEmitter.prototype, {
 		return _album;
 	}
 
+	, getPhoto: function (photoid) {
+		var photo;
+
+		for (var i = 0; i < _album.photos.length; i++) {
+			if (photoid === _album.photos[i].id) {
+				photo = _album.photos[i];
+				break;
+			}
+		}
+
+		return photo;
+	}
+
 	, isAlbum: function (albumid) {
 		return (!!_album && _album.album.id === albumid) || false;
 	}
