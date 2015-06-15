@@ -33,5 +33,5 @@ $ APP_ENV=development npm run start-dev
 
 # TODO
 
-* Use a transition in the Photo component to fetch the remote image.
 * Get rid of the message "Warning: render(): Target node has markup rendered by React, but there are unrelated nodes as well. This is most commonly caused by white-space inserted around server-rendered markup." caused by ReactAsync.injectIntoMarkup method.
+* Get rid of the message "Warning: transition(): tried to perform an animation without an animationend or transitionend event after timeout (5000ms). You should either disable this transition in JS or add a CSS animation/transition." caused by the CSSTransitionGroup addon.

@@ -31,12 +31,12 @@ for (var i = 0; i < config.pages.length; i++) {
 	}
 	else if (page.key === constants.PageKeys.GALLERY) {
 		routes.push(
-			<Route key={'route-' + page.key} path={page.route}>
-				<Route path=":albumid">
+			<Route name={page.key} key={'route-' + page.key} path={page.route}>
+				<Route name={page.key + '-album'} path=":albumid">
 					<Route name={page.key + '-photo'} path=":photoid" handler={Photo} />
-					<DefaultRoute name={page.key + '-album'} handler={Album} />
+					<DefaultRoute handler={Album} />
 				</Route>
-				<DefaultRoute name={page.key} handler={AlbumList} />
+				<DefaultRoute handler={AlbumList} />
 			</Route>
 		);
 	}

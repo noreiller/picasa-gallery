@@ -16,6 +16,7 @@ var Loading = require('./loading.jsx');
 function _getAlbum () {
 	return {
 		album: AlbumStore.getAlbum()
+		, loading: false
 	};
 }
 
@@ -76,8 +77,8 @@ var AlbumComponent = React.createClass({
 					hasActive = true;
 					titles.unshift(photo.title);
 					image = (
-						<ReactCSSTransitionGroup transitionName="transition" transitionAppear={true}>
-							<img ref="active" className="image full" alt={photo.title} src={photo.image} width={photo.image_width} height={photo.image_height} />
+						<ReactCSSTransitionGroup transitionName="transition" transitionAppear={true} transitionLeave={false}>
+							<img className="image full" alt={photo.title} src={photo.image} width={photo.image_width} height={photo.image_height} />
 						</ReactCSSTransitionGroup>
 					);
 
@@ -102,7 +103,9 @@ var AlbumComponent = React.createClass({
 			if (!!prevId) {
 				prevLink = (
 					<li className="prev">
-						<Link className="prev" to={constants.PageKeys.GALLERY + '-photo'} params={{ albumid: this.state.album.album.id, photoid: prevId }}>
+						<Link className="prev" to={constants.PageKeys.GALLERY + '-photo'}
+							onClick={this._onClick}
+							params={{ albumid: this.state.album.album.id, photoid: prevId }}>
 							{constants.I18n[config.lang].PREVIOUS_PHOTO}
 						</Link>
 					</li>
@@ -112,7 +115,9 @@ var AlbumComponent = React.createClass({
 			if (!!nextId) {
 				nextLink = (
 					<li className="next">
-						<Link className="next" to={constants.PageKeys.GALLERY + '-photo'} params={{ albumid: this.state.album.album.id, photoid: nextId }}>
+						<Link className="next" to={constants.PageKeys.GALLERY + '-photo'}
+							onClick={this._onClick}
+							params={{ albumid: this.state.album.album.id, photoid: nextId }}>
 							{constants.I18n[config.lang].NEXT_PHOTO}
 						</Link>
 					</li>
@@ -127,7 +132,7 @@ var AlbumComponent = React.createClass({
 
 		return (
 			<DocumentTitle title={utils.getPageTitle(titles)}>
-				<div className="photo-component">
+				<div className={"photo-component" + (!!this.state.loading ? ' loading' : '')}>
 					<h1>{titles[0]}</h1>
 
 					{image}
@@ -158,6 +163,14 @@ var AlbumComponent = React.createClass({
 	, _onChange: function () {
 		if (this.isMounted()) {
 			this.setState(_getAlbum());
+		}
+	}
+
+	, _onClick: function () {
+		if (this.isMounted()) {
+			this.setState({
+				loading: true
+			});
 		}
 	}
 });
