@@ -254,7 +254,9 @@ var AlbumListComponent = React.createClass({displayName: "AlbumListComponent",
 
 		if (!items.length) {
 			items.push(
-				React.createElement("li", null, React.createElement(Loading, null))
+				React.createElement("li", {key: "photo-loading"}, 
+					React.createElement(Loading, null)
+				)
 			);
 		}
 
@@ -355,7 +357,9 @@ var AlbumComponent = React.createClass({displayName: "AlbumComponent",
 		}
 		else {
 			items.push(
-				React.createElement("li", null, React.createElement(Loading, null))
+				React.createElement("li", {key: "photo-loading"}, 
+					React.createElement(Loading, null)
+				)
 			);
 		}
 

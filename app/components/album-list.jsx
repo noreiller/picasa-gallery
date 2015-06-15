@@ -56,7 +56,9 @@ var AlbumListComponent = React.createClass({
 
 		if (!items.length) {
 			items.push(
-				<li><Loading/></li>
+				<li key="photo-loading">
+					<Loading/>
+				</li>
 			);
 		}
 

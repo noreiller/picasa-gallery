@@ -63,7 +63,9 @@ var AlbumComponent = React.createClass({
 		}
 		else {
 			items.push(
-				<li><Loading/></li>
+				<li key="photo-loading">
+					<Loading/>
+				</li>
 			);
 		}
 
