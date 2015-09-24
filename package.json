@@ -24,13 +24,13 @@
     ]
   },
   "dependencies": {
-    "autoprefixer": "^5.1.1",
+    "autoprefixer": "^6.0.3",
     "body-parser": "^1.12.4",
-    "browserify": "^10.2.1",
+    "browserify": "^11.1.0",
     "configurify": "^1.0.0",
     "cssmin": "^0.4.3",
     "ejs": "^2.3.1",
-    "es6-promise": "^2.1.1",
+    "es6-promise": "^3.0.2",
     "express": "^4.12.3",
     "fibers": "^1.0.5",
     "less": "^2.5.1",
@@ -38,7 +38,7 @@
     "normalize.css": "^3.0.3",
     "react": "^0.13.3",
     "react-async": "^2.1.0",
-    "react-document-title": "^1.0.2",
+    "react-document-title": "^2.0.1",
     "react-router": "^0.13.3",
     "reactify": "^1.1.1",
     "superagent": "^1.2.0",
@@ -46,7 +46,7 @@
   },
   "devDependencies": {
     "jshint": "^2.7.0",
-    "jsxhint": "^0.14.0",
+    "jsxhint": "^0.15.1",
     "nodemon": "^1.3.7",
     "watchify": "^3.2.1"
   }
