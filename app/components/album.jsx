@@ -15,6 +15,7 @@ var Loading = require('./loading.jsx');
 function _getAlbum () {
 	return {
 		album: AlbumStore.getAlbum()
+		, loading: false
 	};
 }
 
@@ -53,7 +54,9 @@ var AlbumComponent = React.createClass({
 				items.push(
 					<li className="photo-item" key={'photo-' + photo.id}>
 						<Link className="photo-link" to={constants.PageKeys.GALLERY + '-photo'}
-							params={{ albumid: this.state.album.album.id, photoid: photo.id }}>
+							onClick={this._onClick}
+							params={{ albumid: this.state.album.album.id, photoid: photo.id }}
+						>
 							<img className="photo-image thumb" alt={photo.title} src={photo.thumbnail}
 								width={photo.thumbnail_width} height={photo.thumbnail_height} />
 						</Link>
@@ -63,6 +66,14 @@ var AlbumComponent = React.createClass({
 		}
 		else {
 			items.push(
+				<li key="photo-loading">
+					<Loading/>
+				</li>
+			);
+		}
+
+		if (!!this.state.loading) {
+			items = (
 				<li key="photo-loading">
 					<Loading/>
 				</li>
@@ -101,6 +112,14 @@ var AlbumComponent = React.createClass({
 	, _onChange: function () {
 		if (this.isMounted()) {
 			this.setState(_getAlbum());
+		}
+	}
+
+	, _onClick: function () {
+		if (this.isMounted()) {
+			this.setState({
+				loading: true
+			});
 		}
 	}
 });

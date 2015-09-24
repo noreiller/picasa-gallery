@@ -12,6 +12,7 @@ var Loading = require('./loading.jsx');
 function _getAlbums () {
 	return {
 		albums: AlbumsStore.getAlbums()
+		, loading: false
 	};
 }
 
@@ -44,7 +45,10 @@ var AlbumListComponent = React.createClass({
 
 			items.push(
 				<li className="album-item" key={'album-' + album.id}>
-					<Link className="album-link" to={constants.PageKeys.GALLERY + '-album'} params={{ albumid: album.id }}>
+					<Link className="album-link" to={constants.PageKeys.GALLERY + '-album'}
+						onClick={this._onClick}
+						params={{ albumid: album.id }}
+					>
 						<img src={album.thumbnail} width={album.thumbnail_width} height={album.thumbnail_height} alt={album.title} className="album-image" />
 						<div className="album-title">
 							<h2>{album.title}</h2>
@@ -54,8 +58,16 @@ var AlbumListComponent = React.createClass({
 			);
 		}
 
-		if (!items.length) {
+		if (!items.length || !!this.state.loading) {
 			items.push(
+				<li key="photo-loading">
+					<Loading/>
+				</li>
+			);
+		}
+
+		if (!!this.state.loading) {
+			items = (
 				<li key="photo-loading">
 					<Loading/>
 				</li>
@@ -87,6 +99,14 @@ var AlbumListComponent = React.createClass({
 	, _onChange: function () {
 		if (this.isMounted()) {
 			this.setState(_getAlbums());
+		}
+	}
+
+	, _onClick: function () {
+		if (this.isMounted()) {
+			this.setState({
+				loading: true
+			});
 		}
 	}
 });

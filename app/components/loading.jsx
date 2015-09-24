@@ -7,7 +7,7 @@ var constants = require('../constants.js');
 var LoadingComponent = React.createClass({
 	render: function () {
 		return (
-			<div className="loading">{constants.I18n[config.lang].LOADING}</div>
+			<div className="loading-component">{constants.I18n[config.lang].LOADING}</div>
 		);
 	}
 });

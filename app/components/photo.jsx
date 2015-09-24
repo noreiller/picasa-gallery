@@ -130,9 +130,15 @@ var AlbumComponent = React.createClass({
 			);
 		}
 
+		if (!!this.state.loading) {
+			image = (
+				<Loading/>
+			);
+		}
+
 		return (
 			<DocumentTitle title={utils.getPageTitle(titles)}>
-				<div className={"photo-component" + (!!this.state.loading ? ' loading' : '')}>
+				<div className="photo-component">
 					<h1>{titles[0]}</h1>
 
 					{image}
